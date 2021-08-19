@@ -29,16 +29,16 @@ func main() {
 	}
 	fmt.Printf("Parsed integer: %d\n", bInt)
 
-	if operator == "+" {
+	switch operator {
+	case "+":
 		fmt.Println(aInt + bInt)
-	}
-	if operator == "-" {
+	case "-":
 		fmt.Println(aInt - bInt)
-	}
-	if operator == "/" {
+	case "/":
 		fmt.Println(aInt / bInt)
-	}
-	if operator == "*" {
+	case "*":
 		fmt.Println(aInt * bInt)
+	default:
+		fmt.Println(operator)
 	}
 }
