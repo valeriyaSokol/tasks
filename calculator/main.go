@@ -5,29 +5,26 @@ import (
 	"strconv"
 )
 
-func main() {
-	var a string
-	var b string
+func getOperator(text string) string {
 	var operator string
 
-	fmt.Println("Введите первое число")
-	fmt.Scanln(&a)
-	aInt, err := strconv.Atoi(a)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("Parsed integer: %d\n", aInt)
-
-	fmt.Println("Введите: + - * /")
+	fmt.Println(text)
 	fmt.Scanln(&operator)
 
-	fmt.Println("Ввидите второе число")
-	fmt.Scanln(&b)
-	bInt, errInt := strconv.Atoi(b)
-	if errInt != nil {
-		panic(errInt)
+	if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
+		fmt.Println("Неверное значение")
+		return getOperator(text)
 	}
-	fmt.Printf("Parsed integer: %d\n", bInt)
+	return operator
+}
+
+func main() {
+
+	aInt := getNumber("Введите первое число")
+
+	operator := getOperator("Введите: + - * /")
+
+	bInt := getNumber("Введите второе число")
 
 	switch operator {
 	case "+":
@@ -41,4 +38,19 @@ func main() {
 	default:
 		fmt.Println(operator)
 	}
+}
+
+func getNumber(text string) int {
+	var numberString string
+
+	fmt.Println(text)
+	fmt.Scanln(&numberString)
+
+	numberInt, err := strconv.Atoi(numberString)
+	if err != nil {
+		fmt.Println("Неверное значение")
+		return getNumber(text)
+	}
+
+	return numberInt
 }
